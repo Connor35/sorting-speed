@@ -12,7 +12,6 @@ import time
 ################################
 # MERGESORT
 def mergesort(a):
-
 	if(len(a) == 1):
 		return a
 	else:
@@ -66,6 +65,35 @@ def quicksort(a):
 
 ################################
 ################################
+# INSERTION SORT
+def insertionsort(a):
+    len_a = len(a)
+    if len_a == 0 or len_a == 1:
+        return a
+    arr = []
+    for i in range(0, len_a):
+        element = a[i]
+        arr = _insert(arr, element)
+    return arr
+
+def _insert(arr, element):
+    len_arr = len(arr)
+    if len_arr == 0:
+        arr.append(element)
+        return arr
+    for i in range(0, len_arr):
+        if element < arr[i]:
+            arr.insert(i, element)
+            return arr
+    arr.append(element)
+    return arr
+
+################################
+################################
+
+
+################################
+################################
 # DRIVER
 
 if __name__ == "__main__":
@@ -73,6 +101,7 @@ if __name__ == "__main__":
     #### create random arrays ####
     a1, b1, c1, d1 = [], [], [], []
     a2, b2, c2, d2 = [], [], [], []
+    a3, b3, c3, d3 = [], [], [], []
 
     print("\nCreating randomized arrays...")
 
@@ -80,25 +109,29 @@ if __name__ == "__main__":
         element = random.randrange(1000)
         a1.append(element)
         a2.append(element)
-    print("\t'a1' and 'a2' created (length 100)")
+        a3.append(element)
+    print("\t'a' created (length 100)")
 
     for i in range(1, 1000):
         element = random.randrange(1000)
         b1.append(element)
         b2.append(element)
-    print("\t'b1' and 'b2' created (length 1000)")
+        b3.append(element)
+    print("\t'b' created (length 1000)")
 
     for i in range(1, 10000):
         element = random.randrange(1000)
         c1.append(element)
         c2.append(element)
-    print("\t'c1' and 'c2' created (length 10000)")
+        c3.append(element)
+    print("\t'c' created (length 10000)")
 
     for i in range(1, 100000):
         element = random.randrange(1000)
         d1.append(element)
         d2.append(element)
-    print("\t'd1' and 'd2' created (length 100000)")
+        d3.append(element)
+    print("\t'd' created (length 100000)")
 
     print("...all arrays created")
     print("\n\tTIMING RESULTS\n")
@@ -115,6 +148,11 @@ if __name__ == "__main__":
     msort_time_b = 0
     msort_time_c = 0
     msort_time_d = 0
+
+    isort_time_a = 0
+    isort_time_b = 0
+    isort_time_c = 0
+    isort_time_d = 0
 
     #### time quicksort ####
     time_1 = time.time()
@@ -158,6 +196,28 @@ if __name__ == "__main__":
     time_2 = time.time()
     msort_time_d = time_2 - time_1
 
+    #### time insertionsort ####
+    time_1 = time.time()
+    a3 = insertionsort(a3)
+    time_2 = time.time()
+    isort_time_a = time_2 - time_1
+
+    time_1 = time.time()
+    b3 = insertionsort(b3)
+    time_2 = time.time()
+    isort_time_b = time_2 - time_1
+
+    time_1 = time.time()
+    c3 = insertionsort(c3)
+    time_2 = time.time()
+    isort_time_c = time_2 - time_1
+
+    # 100,000 elements takes approximately 5 minutes
+    # time_1 = time.time()
+    # d3 = insertionsort(d3)
+    # time_2 = time.time()
+    # isort_time_d = time_2 - time_1
+
     #### print results####
     print("Quicksort:")
     print("'a1' time: " + str(round(qsort_time_a, 4)))
@@ -171,6 +231,13 @@ if __name__ == "__main__":
     print("'b2' time: " + str(round(msort_time_b, 4)))
     print("'c2' time: " + str(round(msort_time_c, 4)))
     print("'d2' time: " + str(round(msort_time_d, 4)))
+    print("")
+
+    print("Insertionsort:")
+    print("'a3' time: " + str(round(isort_time_a, 4)))
+    print("'b3' time: " + str(round(isort_time_b, 4)))
+    print("'c3' time: " + str(round(isort_time_c, 4)))
+    print("'d3' time: -too slow-")
     print("")
 
 ################################
